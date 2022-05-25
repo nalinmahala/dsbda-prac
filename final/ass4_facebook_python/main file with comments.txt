@@ -1,0 +1,382 @@
+#!/usr/bin/env python
+# coding: utf-8
+
+# In[1]:
+
+
+import pandas as pd
+
+
+# In[2]:
+
+
+data = pd.read_csv('fb.csv')	#dataset ki location
+
+
+# In[3]:
+
+
+
+
+# In[4]:
+
+
+data.shape		#row or column		
+
+
+# In[5]:
+
+
+data.head()		#by defaULT first 5
+
+
+# In[6]:
+
+
+data.tail()		#by default last 5
+
+
+# In[7]:
+
+
+data.iloc[2:10,:] 		#index loaction row and column
+
+
+# In[8]:
+
+
+data.iloc[2:10,1:5]
+
+
+# In[10]:
+
+
+X = data.iloc[2:10,1:5]
+
+
+# In[12]:
+
+
+X.shape			//no of rows and column
+
+
+# In[13]:
+
+
+data.iloc[:10,:5]
+
+
+# In[14]:
+
+
+data.iloc[12:,10:]
+
+
+# In[15]:
+
+
+data.iloc[12,:]
+
+
+# In[17]:
+
+
+data.iloc[:,6]
+
+
+# In[18]:
+
+
+data.iloc[:,18]
+
+
+# In[19]:
+
+
+data.iloc[12:20,18]
+
+
+# In[20]:
+
+
+data.iloc[12:20,[2,5,11,13]]
+
+
+# In[21]:
+
+
+data.iloc[[1,2,6,88,12],[2,5,11,13]]
+
+
+# In[22]:
+
+
+data.iloc[:,:-12]
+
+
+# In[23]:
+
+
+data.loc[:,'Type']		#row,column_name
+
+#subset
+# In[24]:
+
+
+data.loc[:,['Type','like','comment']] 	
+
+
+# In[25]:
+
+
+data.loc[100:110,['Type','like','comment']]
+
+
+# In[26]:
+
+
+data[['Type','like','comment']]
+
+
+# In[27]:
+
+
+data.columns		#column names print
+
+
+# In[30]:
+
+
+x = []
+x.extend(range(2,21))			#add krta h
+x.extend(range(50,70))
+
+
+# In[31]:
+
+
+data.iloc[x,2:6]
+
+
+# In[33]:
+
+
+X = data[['Type','Category','comment','like','share']]      
+
+
+# In[34]:
+
+
+X.shape
+
+
+# In[35]:
+
+
+X.head()
+
+
+# In[38]:
+
+
+Z = X[X['like']>100]
+
+
+# In[39]:
+
+
+Z.shape
+
+
+# In[40]:
+
+
+Z.head()
+
+
+# In[41]:
+
+
+Z = X[(X['like']>100) & (X['share'] > 40)]
+
+
+# In[42]:
+
+
+Z.shape
+
+
+# In[43]:
+
+
+Z.head()
+
+
+# In[44]:
+
+###################################################################
+Z.to_csv('output.csv', index = False)
+
+
+# In[45]:
+
+
+Z.to_html('output.html',index = False)
+#######################################################
+
+#merging
+
+# In[46]:
+
+
+newdata = pd.read_csv('newfb.csv')
+
+
+# In[47]:
+
+
+newdata.shape
+
+
+# In[48]:
+
+
+data.shape
+
+
+# In[49]:
+
+
+merged = data.append(newdata)  
+
+
+# In[50]:
+
+
+merged.shape
+
+
+# In[51]:
+
+
+Y = data.drop(['Type','comment','Category'], axis = 1) #row me se ye 3 cheeze hat jayengi
+
+
+# In[52]:
+
+
+Y.shape
+
+
+# In[53]:
+
+
+Y = data.drop([1,2,3,4,5,6,7,8,9])  #ye row hat jayengi if axis is zero or nothing
+
+
+# In[54]:
+
+
+Y.shape
+
+
+# In[55]:
+
+
+X.shape
+
+
+# In[57]:
+
+
+Z.shape
+
+#sort
+###########################################
+
+# In[59]:
+
+
+Y = Z.sort_values(by='comment', ascending = False)
+
+
+# In[60]:
+
+
+Y.head()
+
+
+# In[62]:
+
+
+Z.shape
+
+#transpose
+###############################
+# In[63]:
+
+
+Y = Z.T
+
+
+# In[64]:
+
+
+Y.shape
+
+
+# In[65]:
+
+
+Y.head()
+
+#melting
+#######################
+# In[66]:
+
+
+Z.melt()
+
+
+# In[67]:
+
+
+Z.melt(id_vars='Category')
+
+
+# In[69]:
+
+
+Z.melt(id_vars=['Category'] , value_vars=['type'])
+
+#casting
+# In[70]:
+
+
+Y = pd.get_dummies(Z)
+
+
+# In[71]:
+
+
+Y.head()
+
+
+# In[73]:
+
+
+dir(Z)
+
+
+# In[74]:
+
+
+len(dir(Z))
+
+
+# In[ ]:
+
+
+
+
+

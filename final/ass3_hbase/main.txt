@@ -1,0 +1,27 @@
+create 'flight','finfo','fsch'
+
+
+list
+
+
+
+put 'flight',1,'finfo:source','pune'
+put 'flight',1,'finfo:dest','mumbai'
+put 'flight',1,'fsch:at','10.25a.m.'
+put 'flight',1,'fsch:dt','11.25 a.m.'
+put 'flight',1,'fsch:delay','5min'
+
+
+scan 'flight'
+
+
+ alter 'flight',NAME=>'revenue'
+put 'flight',4,'revenue:rs','45000'
+alter 'flight',NAME=>'revenue',METHOD=>'delete'
+
+
+disable 'tb1'
+drop 'tb1'
+
+
+
